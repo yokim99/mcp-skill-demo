@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MCP 与 Skill 的区别</title>
+<style>
+  :root{ --red:#C7000B; --dark:#1f1f1f; --gray:#5a5a5a; --blue:#1b4f9c; --line:#e6e8eb; --bg:#f2f3f5; }
+  *{ box-sizing:border-box; margin:0; padding:0; }
+  body{
+    font-family:"Microsoft YaHei","微软雅黑",-apple-system,"PingFang SC","Helvetica Neue",sans-serif;
+    background:var(--bg); color:var(--dark); -webkit-font-smoothing:antialiased; padding:32px 16px 56px;
+  }
+  .deck{ max-width:1080px; margin:0 auto; display:flex; flex-direction:column; gap:28px; }
+  .slide{ background:#fff; border-radius:14px; box-shadow:0 6px 24px rgba(0,0,0,.06); overflow:hidden; }
+  .bar{ height:6px; background:var(--red); }
+
+  .cover{ padding:0; }
+  .cover .head{ background:var(--red); color:#fff; padding:44px 52px 38px; }
+  .cover h1{ font-size:38px; letter-spacing:.5px; }
+  .cover .sub{ margin-top:12px; font-size:18px; color:#ffd9db; }
+  .cover .cards{ display:grid; grid-template-columns:1fr 1fr; gap:22px; padding:36px 52px 44px; }
+  .card{ border:1px solid var(--line); border-top:4px solid var(--blue); border-radius:10px; padding:24px 26px; background:#fff; }
+  .card.mcp{ border-top-color:var(--red); }
+  .card h2{ font-size:26px; color:var(--blue); margin-bottom:4px; }
+  .card.mcp h2{ color:var(--red); }
+  .card .en{ font-size:13px; color:var(--gray); margin-bottom:16px; }
+  .card .lead{ font-size:16px; font-weight:700; line-height:1.5; margin-bottom:14px; }
+  .card ul{ list-style:none; display:flex; flex-direction:column; gap:9px; }
+  .card li{ font-size:14px; color:var(--gray); line-height:1.5; padding-left:16px; position:relative; }
+  .card li::before{ content:""; position:absolute; left:0; top:8px; width:6px; height:6px; border-radius:50%; background:currentColor; opacity:.5; }
+
+  .sec{ padding:36px 52px 44px; }
+  .sec h2{ font-size:26px; padding-bottom:14px; position:relative; margin-bottom:8px; }
+  .sec h2::after{ content:""; position:absolute; left:0; bottom:0; width:56px; height:3px; background:var(--red); border-radius:2px; }
+  .sec .note{ color:var(--gray); font-size:14px; margin:14px 0 22px; }
+
+  table{ width:100%; border-collapse:collapse; font-size:14.5px; }
+  thead th{ background:var(--red); color:#fff; text-align:left; padding:13px 16px; font-size:15px; font-weight:700; }
+  tbody td{ padding:12px 16px; border-bottom:1px solid var(--line); }
+  tbody tr:nth-child(even){ background:#fafbfc; }
+  tbody td:first-child{ font-weight:700; color:var(--dark); width:22%; }
+  tbody td:nth-child(2){ color:var(--red); }
+  tbody td:nth-child(3){ color:var(--blue); }
+
+  .flow{ display:grid; grid-template-columns:1fr 44px 1fr 44px 1fr; align-items:center; gap:0; margin-top:8px; }
+  .step{ border:1px solid var(--line); border-radius:10px; padding:20px; background:#fff; min-height:132px; }
+  .step.a{ border-top:4px solid var(--blue); }
+  .step.b{ border-top:4px solid var(--red); }
+  .step.c{ border-top:4px solid var(--dark); }
+  .step .t{ font-size:17px; font-weight:700; margin-bottom:8px; }
+  .step.a .t{ color:var(--blue); } .step.b .t{ color:var(--red); }
+  .step p{ font-size:13.5px; color:var(--gray); line-height:1.55; }
+  .arrow{ text-align:center; color:#bbb; font-size:24px; }
+  .example{ background:var(--bg); border-radius:10px; padding:20px 24px; margin-top:22px; font-size:14.5px; line-height:1.6; }
+  .example b{ color:var(--red); }
+  .conclusion{ background:var(--red); color:#fff; border-radius:10px; padding:22px 26px; margin-top:16px; font-size:19px; font-weight:700; text-align:center; }
+
+  @media (max-width:720px){
+    .cover .head{ padding:32px 26px; } .cover .cards{ grid-template-columns:1fr; padding:26px; }
+    .sec{ padding:26px; } .flow{ grid-template-columns:1fr; gap:12px; } .arrow{ transform:rotate(90deg); }
+    .cover h1{ font-size:28px; } table{ font-size:13px; } thead th,tbody td{ padding:10px; }
+  }
+</style>
+</head>
+<body>
+<div class="deck">
+
+  <!-- 第 1 页 -->
+  <section class="slide cover">
+    <div class="head">
+      <h1>MCP 与 Skill 的区别</h1>
+      <div class="sub">一个解决“能连什么”，一个解决“怎么做”</div>
+    </div>
+    <div class="cards">
+      <div class="card mcp">
+        <h2>MCP</h2>
+        <div class="en">Model Context Protocol</div>
+        <div class="lead">一套开放标准协议，让 AI 连接外部工具与数据源</div>
+        <ul>
+          <li>像“USB 接口”，插上就能调用数据库、API、文件系统</li>
+          <li>客户端—服务器架构，运行时按需调用</li>
+          <li>解决“AI 够不够得着外部世界”</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h2>Skill</h2>
+        <div class="en">能力包 / 技能</div>
+        <div class="lead">一份能力包，用指令与脚本告诉 AI 特定任务该怎么做</div>
+        <ul>
+          <li>像“操作手册”，照着就能把活干对</li>
+          <li>通常是文件（SKILL.md + 脚本资源），零依赖</li>
+          <li>解决“AI 做得对不对、像不像专家”</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 第 2 页 -->
+  <section class="slide">
+    <div class="bar"></div>
+    <div class="sec">
+      <h2>六个维度，看清差异</h2>
+      <div class="note">MCP 是“通道”，Skill 是“经验”——两者维度不同</div>
+      <table>
+        <thead>
+          <tr><th>对比维度</th><th>MCP</th><th>Skill</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>本质</td><td>通信协议 / 接口标准</td><td>指令 + 资源的能力包</td></tr>
+          <tr><td>解决的问题</td><td>能不能访问外部系统</td><td>如何高质量完成特定任务</td></tr>
+          <tr><td>形态</td><td>客户端—服务器，需运行服务</td><td>纯文件（SKILL.md + 脚本）</td></tr>
+          <tr><td>生效时机</td><td>运行时动态调用工具</td><td>加载进上下文，指导行为</td></tr>
+          <tr><td>依赖</td><td>需连接服务、鉴权</td><td>通常零依赖，拷文件即可</td></tr>
+          <tr><td>一句话类比</td><td>USB 接口：插上就能用</td><td>操作手册：照着就能干好</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- 第 3 页 -->
+  <section class="slide">
+    <div class="bar"></div>
+    <div class="sec">
+      <h2>不是二选一，而是相互配合</h2>
+      <div class="note">MCP 给“手脚”，Skill 给“大脑”——组合起来才是专家</div>
+      <div class="flow">
+        <div class="step a"><div class="t">① Skill 决策</div><p>决定“这活怎么干”：评审规则、步骤、话术</p></div>
+        <div class="arrow">→</div>
+        <div class="step b"><div class="t">② MCP 取数</div><p>把代码 / 数据 / 接口取回到 AI 面前</p></div>
+        <div class="arrow">→</div>
+        <div class="step c"><div class="t">③ 输出结果</div><p>既有“料”又有“法”，给出专业交付</p></div>
+      </div>
+      <div class="example"><b>例子：一次“代码评审”</b><br>评审 Skill 提供“怎么评”的标准与方法 → MCP 通过 Git 工具把代码拉回来 → AI 按标准给出评审意见。</div>
+      <div class="conclusion">一句话：MCP 解决“连得上”，Skill 解决“用得好”。</div>
+    </div>
+  </section>
+
+</div>
+</body>
+</html>
